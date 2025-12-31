@@ -1,8 +1,21 @@
 import { useState } from 'react'
+import { languages } from './languages'
 
 
 export default function App() {
 
+  const languageElements = languages.map(lang => {
+    const styles = {
+        backgroundColor: lang.backgroundColor,
+        color: lang.color
+    }
+    return (
+        <span key={lang.name} className='chip' style={styles}>{lang.name}</span>
+    )
+})
+
+ 
+  
   return(
     <main>
       <header>
@@ -13,6 +26,10 @@ export default function App() {
 
       <section className='game-status'>
         <h2>You Win!</h2>
+      </section>
+
+      <section className='languages'>
+        {languageElements}
       </section>
     </main>
   )
