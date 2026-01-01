@@ -14,6 +14,13 @@ export default function App() {
     )
 })
 
+  const [ currentWord, setCurrentWord ] = useState("react")
+
+  const charElements = currentWord.split('').map((char, index) => {
+    return (
+      <span key={index}>{char.toUpperCase()}</span>
+    )
+  })
  
   
   return(
@@ -30,6 +37,10 @@ export default function App() {
 
       <section className='languages'>
         {languageElements}
+      </section>
+
+      <section className='word'>
+        {charElements}
       </section>
     </main>
   )
