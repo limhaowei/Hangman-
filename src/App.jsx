@@ -4,6 +4,11 @@ import { languages } from './languages'
 
 export default function App() {
 
+  const [ guessedLetters, setGuessedLetters ] = useState([])
+  const [ currentWord, setCurrentWord ] = useState("react")
+
+  const alphabet = "abcdefghijklmnopqrstuvwxyz"
+
   const languageElements = languages.map(lang => {
     const styles = {
         backgroundColor: lang.backgroundColor,
@@ -14,13 +19,28 @@ export default function App() {
     )
 })
 
-  const [ currentWord, setCurrentWord ] = useState("react")
+  const alphabetElements = alphabet.split('').map((char) => {
+    return (
+      <button onClick={() => userGuess(char)} key={char}>{char.toUpperCase()}</button>
+    )
+  })
+
 
   const charElements = currentWord.split('').map((char, index) => {
     return (
       <span key={index}>{char.toUpperCase()}</span>
     )
   })
+
+  
+  function userGuess(char) {
+    setGuessedLetters(prev => prev.includes(char) ? prev : [...prev, char])
+  }
+//   setGuessedLetters(prevLetters => {
+//     const lettersSet = new Set(prevLetters)
+//     lettersSet.add(letter)
+//     return Array.from(lettersSet)
+// })
  
   
   return(
@@ -42,6 +62,12 @@ export default function App() {
       <section className='word'>
         {charElements}
       </section>
+
+      <section className='keyboard'>
+        {alphabetElements}
+      </section>
+
+      <button className='new-game'>New Game</button>
     </main>
   )
 }
