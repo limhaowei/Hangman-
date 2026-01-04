@@ -103,8 +103,19 @@ section.keyboard > button {
   cursor: pointer;
   font-size: 1.1rem;
   font-weight: 500;
-
 }
+
+section.keyboard > button.correct {
+  cursor: not-allowed;
+  background-color: #10A95B;
+}
+
+section.keyboard > button.wrong {
+  cursor: not-allowed;
+  background-color: #E51111;
+}
+
+
 
 button.new-game {
   background-color: #11B5E5;
