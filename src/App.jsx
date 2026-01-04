@@ -38,8 +38,9 @@ export default function App() {
 
 
   const charElements = currentWord.split('').map((char, index) => {
+    const isGuessed = guessedLetters.includes(char)
     return (
-      <span key={index}>{char.toUpperCase()}</span>
+      <span key={index}>{isGuessed ? char.toUpperCase() : ""}</span>
     )
   })
 
