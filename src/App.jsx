@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { languages } from './languages'
-import {clsx }from 'clsx'
+import { clsx }from 'clsx'
 
 
 export default function App() {
@@ -8,15 +8,26 @@ export default function App() {
   const [ guessedLetters, setGuessedLetters ] = useState([])
   const [ currentWord, setCurrentWord ] = useState("react")
 
+  const wrongGuessCount = guessedLetters.filter(letter => !currentWord.includes(letter)).length
+  ''
+
   const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
-  const languageElements = languages.map(lang => {
+  const languageElements = languages.map((lang, index) => {
     const styles = {
         backgroundColor: lang.backgroundColor,
         color: lang.color
     }
+    const isLost = index < wrongGuessCount
     return (
-        <span key={lang.name} className='chip' style={styles}>{lang.name}</span>
+        <span 
+          key={lang.name} 
+          className= {clsx("chip", isLost && "lost")}
+          // className={`chip ${isLost ? "lost" : ""}`}
+          style={styles}
+        >
+          {lang.name}
+        </span>
     )
 })
 
