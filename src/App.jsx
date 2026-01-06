@@ -9,7 +9,13 @@ export default function App() {
   const [ currentWord, setCurrentWord ] = useState("react")
 
   const wrongGuessCount = guessedLetters.filter(letter => !currentWord.includes(letter)).length
-  ''
+
+  const isGameWon = currentWord.split("").every(letter => guessedLetters.includes(letter))
+  const isGameLost = wrongGuessCount >= languages.length - 1
+
+  const isGameOver = isGameWon || isGameLost
+
+
 
   const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
@@ -18,7 +24,7 @@ export default function App() {
         backgroundColor: lang.backgroundColor,
         color: lang.color
     }
-    const isLost = index < wrongGuessCount
+    const isLost = index < wrongGuessCount 
     return (
         <span 
           key={lang.name} 
@@ -30,6 +36,7 @@ export default function App() {
         </span>
     )
 })
+
 
   const alphabetElements = alphabet.split('').map((char) => {
     const isGuessed = guessedLetters.includes(char)
@@ -74,8 +81,25 @@ export default function App() {
         programming world safe from Assembly!</p>
       </header>
 
-      <section className='game-status'>
-        <h2>You Win!</h2>
+      <section className={clsx("game-status", {
+        "game-won": isGameWon,
+        "game-lost": isGameLost
+      })}>
+        {isGameWon ? (
+          <>
+            <h2>You win!</h2>
+          </>
+        ) : isGameLost ? (
+          <>
+            <h2>Game over!</h2>
+            <p>You lose!</p>
+          </>
+        ) : (
+          <>
+            <h2>Keep guessing...</h2>
+            <p>You have {languages.length - wrongGuessCount - 1} attempts left.</p>
+          </>
+        )}
       </section>
 
       <section className='languages'>
@@ -90,7 +114,7 @@ export default function App() {
         {alphabetElements}
       </section>
 
-      <button className='new-game'>New Game</button>
+      {isGameOver && <button className='new-game'>New Game</button>}
     </main>
   )
 }
