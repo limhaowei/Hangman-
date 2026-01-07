@@ -74,6 +74,25 @@ export default function App() {
 //     lettersSet.add(letter)
 //     return Array.from(lettersSet)
 // })
+
+  function renderGameStatus(){
+    if (isGameWon) {
+      return (
+        <>
+          <h2>You win!</h2>
+        </>
+      )
+    }
+
+    if (isGameLost) {
+      return (
+        <>
+          <h2>Game over!</h2>
+          <p>You lose!</p>
+        </>
+      )
+    }
+  }
  
   
   return(
@@ -88,7 +107,7 @@ export default function App() {
         "game-won": isGameWon,
         "game-lost": isGameLost
       })}>
-        {isGameWon ? (
+        {/* {isGameWon ? (
           <>
             <h2>You win!</h2>
           </>
@@ -102,7 +121,8 @@ export default function App() {
             <h2>Keep guessing...</h2>
             <p>You have {languages.length - wrongGuessCount - 1} attempts left.</p>
           </>
-        )}
+        )} */}
+        {renderGameStatus()}
       </section>
 
       <section className='languages'>
