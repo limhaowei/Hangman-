@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { languages } from './languages'
 import { clsx }from 'clsx'
+import { getFarewellText } from './utils'
 
 
 export default function App() {
@@ -12,8 +13,10 @@ export default function App() {
 
   const isGameWon = currentWord.split("").every(letter => guessedLetters.includes(letter))
   const isGameLost = wrongGuessCount >= languages.length - 1
-
   const isGameOver = isGameWon || isGameLost
+
+  const lastGuessedLetter = guessedLetters[guessedLetters.length - 1]
+  const isLastGuessIncorrect = lastGuessedLetter && !currentWord.includes(lastGuessedLetter)
 
 
 
