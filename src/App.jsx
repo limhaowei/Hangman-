@@ -92,6 +92,26 @@ export default function App() {
         </>
       )
     }
+
+    if (isLastGuessIncorrect && wrongGuessCount > 0) {
+      const justLostLanguage = languages[wrongGuessCount - 1]
+      if (justLostLanguage) {
+        const farewellMessage = getFarewellText(justLostLanguage.name)
+        return (
+          <>
+            <h2>{farewellMessage}</h2>
+            <p>You have {languages.length - wrongGuessCount - 1} attempts left.</p>
+          </>
+        )
+      }
+    }
+
+    return (
+      <>
+        <h2>Keep guessing...</h2>
+        <p>You have {languages.length - wrongGuessCount - 1} attempts left.</p>
+      </>
+    )
   }
  
   
