@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { languages } from './languages'
 import { clsx }from 'clsx'
 import { getFarewellText, generateRandomWord } from './utils'
+import Confetti from "react-confetti"
 
 
 export default function App() {
@@ -64,7 +65,7 @@ export default function App() {
   const charElements = currentWord.split('').map((char, index) => {
     const isGuessed = guessedLetters.includes(char)
     return (
-      <span key={index}>{isGuessed ? char.toUpperCase() : ""}</span>
+      <span key={index}>{isGuessed || isGameLost ? char.toUpperCase() : ""}</span>
     )
   })
 
@@ -126,6 +127,7 @@ export default function App() {
   
   return(
     <main>
+      {isGameWon && <Confetti />  }
       <header>
         <h1>Assembly: Endgame</h1>
         <p>Guess the word within 8 attempts to keep the 
