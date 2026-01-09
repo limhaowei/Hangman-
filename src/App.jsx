@@ -117,6 +117,11 @@ export default function App() {
       </>
     )
   }
+
+  function newGame(){
+    setCurrentWord(generateRandomWord())
+    setGuessedLetters([])
+  }
  
   
   return(
@@ -180,7 +185,7 @@ export default function App() {
         {alphabetElements}
       </section>
 
-      {isGameOver && <button className='new-game'>New Game</button>}
+      {isGameOver && <button className='new-game' onClick={newGame}>New Game</button>}
     </main>
   )
 }
