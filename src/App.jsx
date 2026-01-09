@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { languages } from './languages'
 import { clsx }from 'clsx'
-import { getFarewellText } from './utils'
+import { getFarewellText, generateRandomWord } from './utils'
 
 
 export default function App() {
 
   const [ guessedLetters, setGuessedLetters ] = useState([])
-  const [ currentWord, setCurrentWord ] = useState("react")
+  const [ currentWord, setCurrentWord ] = useState(generateRandomWord())
 
   const wrongGuessCount = guessedLetters.filter(letter => !currentWord.includes(letter)).length
 
@@ -50,8 +50,8 @@ export default function App() {
         onClick={() => userGuess(char)} 
         key={char}
         disabled={isGameOver}
-        aria-disabled={guessedLetters.includes(letter)}
-        aria-label={`Letter ${letter}`}
+        aria-disabled={guessedLetters.includes(char)}
+        aria-label={`Letter ${char}`}
         className={clsx({
           'correct': isGuessed && isCorrect,
           'wrong': isWrong,
@@ -170,8 +170,8 @@ export default function App() {
             }
             You have {languages.length - 1} guesses left.
         </p>
-        <p>Current word: {currentWord.split("").map(letter => 
-        guessedLetters.includes(letter) ? letter + "." : "blank.")
+        <p>Current word: {currentWord.split("").map(char => 
+        guessedLetters.includes(char) ? char + "." : "blank.")
         .join(" ")}</p>
             
       </section>
