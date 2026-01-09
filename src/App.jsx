@@ -49,6 +49,7 @@ export default function App() {
       <button 
         onClick={() => userGuess(char)} 
         key={char}
+        disabled={isGameOver}
         className={clsx({
           'correct': isGuessed && isCorrect,
           'wrong': isWrong,
@@ -67,6 +68,7 @@ export default function App() {
 
   
   function userGuess(char) {
+    if (isGameOver) return
     setGuessedLetters(prev => prev.includes(char) ? prev : [...prev, char])
   }
 //   setGuessedLetters(prevLetters => {
